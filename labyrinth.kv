@@ -1,0 +1,79 @@
+#:import layout_examples layout_examples
+#:import widget_examples widget_examples
+#:import navigation_screen_manager navigation_screen_manager
+#:import boxlayout_with_action_bar boxlayout_with_action_bar
+#:import laboptions laboptions
+#:import chapters chapters
+
+<MainMenu@BoxLayout>:
+    orientation: "vertical"
+    spacing: "10dp"
+    Label:
+        text: "Main Menu"
+        size_hint: 1, .3
+    MDRaisedButton:
+        text: "To story"
+        md_bg_color: app.theme_cls.primary_dark
+        size_hint: .5, .18
+        pos_hint: {"center_x": 0.5}
+        on_release: app.manager.push("Kapitel1")
+
+    MDRaisedButton:
+        text: "Options"
+        size_hint: .5, .18
+        pos_hint: {"center_x": 0.5}
+        #md_bg_color:app.theme_cls.primary_light:
+        on_release: app.manager.push("OptionenWindow")
+    MDRaisedButton:
+        text: "Roadmap"
+        size_hint: .5, .18
+        pos_hint: {"center_x": 0.5}
+        on_release: app.manager.push("RoadmapWindow")
+    MDRaisedButton:
+        text: "Exit"
+        size_hint: .5, .18
+        pos_hint: {"center_x": 0.5}
+        on_press: app.stop()
+
+
+
+<MyScreenManager>:
+    Screen:
+        name: "MainMenu"
+        MainMenu
+    Screen:
+        name: "OptionenWindow"
+        BoxLayoutWithActionBar:
+            OptionenWindow:
+
+    Screen:
+        name: "RoadmapWindow"
+        BoxLayoutWithActionBar:
+            RoadmapWindow:
+    Screen:
+        name: "LayoutExamplesTabs"
+        BoxLayoutWithActionBar:
+            title: "PageLayout"
+            LayoutExamplesTabs:
+
+    Screen:
+        name: "WidgetsExample"
+        BoxLayoutWithActionBar:
+            title: "Widgets"
+            WidgetsExample:
+
+    Screen:
+        name: "ImagesExample"
+        BoxLayoutWithActionBar:
+            title: "Images"
+            ImagesExample:
+
+    Screen:
+        name: "Kapitel1"
+        BoxLayoutWithMainMenu:
+            Kapitel1:
+
+    Screen:
+        name: "Kapitel2"
+        BoxLayoutWithMainMenu:
+            Kapitel2:

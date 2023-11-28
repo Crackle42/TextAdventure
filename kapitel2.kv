@@ -1,0 +1,52 @@
+<Kapitel2>:
+    BoxLayout:
+        orientation: "vertical"
+
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+
+            GridLayout:
+                size_hint_y: None
+                height: self.minimum_height
+                rows: 4
+                spacing: 10
+                padding_bot: 80
+
+                Label:
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    text_size: self.width, None
+                    padding: 10, 10
+                    #font_size: app.font_global.font_size
+                    #text: app.load_long_text(r"g:\FD\Dokumente\PythonProjekte\Textadventure\abcwordtest.txt")
+                    text: "Hello in Kapitel 2!"
+
+                Button:
+                    text: "Haunting points"
+                    size_hint_y: None
+                    height: root.height*0.1
+                    pos_hint: {"center_x": 0.5}
+                    on_release:
+                        app.increase_haunting_points()
+                        print("Haunting Points", app.get_haunting_points())
+
+                Button:
+                    text: "Option Variable erhöhen"
+                    size_hint_y: None
+                    height: root.height*0.1
+                    pos_hint: {"center_x": 0.5}
+                    on_release:
+                        app.count.increase_count()
+                        print(app.count.get_count())
+
+                Button:
+                    text: "Nächstes Kapitel"
+                    size_hint_y: None
+                    height: root.height*0.1
+                    pos_hint: {"center_x": 0.5}
+                    on_release:
+                        app.root.current = "kapitel3_screen"
+                        app.save_last_screen("kapitel3_screen")
+
+

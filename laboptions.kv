@@ -1,0 +1,271 @@
+
+<Check@MDCheckbox>:
+    group: "group"
+    size: dp(48), dp(48)
+
+#:import Factory kivy.factory.Factory
+<ConfirmationPopup@Popup>:
+    auto_dismiss: True
+    size_hint: 0.6, 0.3
+    pos_hint: {"x": 0.2, "y": .4}
+    title: "Confirmation for reset"
+    font_size: "30sp"
+
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text: "Reset everything and start the story again?"
+            text_size: self.width, None
+            halign: "center"
+            valign: "middle"
+        BoxLayout:
+            size_hint: 1, 0.3
+            Button:
+                text: "Yes"
+                on_press:
+                    app.pointscount.reset_variables()
+                    app.manager.pop()
+                    #app.save_last_screen("kapitel1_screen")
+                    root.dismiss()
+            Button:
+                text: "No"
+                on_press: root.dismiss()
+
+
+<OptionenWindow>:
+    BoxLayout:
+        orientation: "vertical"
+        spacing: "10dp"
+        Label:
+            text: 'Options'
+            size_hint: 1, 0.2
+            text_size: self.width, None #Zeilenumbruch
+            halign: 'center'
+            font_size: "22sp"
+
+        GridLayout:
+            cols: 2
+            spacing: "10dp"
+            size_hint: .5, 0.6
+            pos_hint: {"center_x": 0.5}
+
+            Button:
+                text: "Dark mode"
+
+            MDCheckbox:
+                id: switch
+                size_hint: .5, .18
+                pos_hint: {"center_x": 0.5}
+                on_active:
+                    app.on_checkbox_active(self)
+                    print(f"dark mode is {app.dark_mode}")
+
+            Label:
+                text: ""
+            Label:
+                text: ""
+
+            Button:
+                text: "Alien"
+            Check:
+                id: font1
+                active: False
+
+            Button:
+                text: "Dyslexic"
+            Check:
+                id: font_dyslexic
+
+            Button:
+                text: "Crimson"
+            Check:
+                id: font_crimson
+
+
+        Widget:
+            size_hint_y: None
+            height: "5dp"
+
+        GridLayout:
+            cols: 3
+            spacing: "10dp"
+            size_hint: .5, 0.2
+            pos_hint: {"center_x": 0.5}
+            Slider:
+                id: my_fontsize
+                min: 10
+                max: 30
+                step: 1
+                size_hint: .5, .18
+                pos_hint: {"center_x": 0.5}
+                on_value_pos:
+                    preview_label.font_size = self.value
+                    #app.font_global.set_font_size(self.value)
+
+            Label:
+                text: str(int(my_fontsize.value))
+                size_hint: .5, .18
+                pos_hint: {"center_x": 0.5}
+
+        Label:
+            id: preview_label
+            text: "Text preview"
+            size_hint: .5, .18
+            pos_hint: {"center_x": 0.5}
+            #font_name: app.font_style
+            font_size: my_fontsize.value
+            #on_font_size: self.texture_update()
+            text_size: self.width, None
+            halign: "center"
+            valign: "middle"
+
+
+        Button:
+            text: "Reset book story"
+            size_hint: .5, .18
+            pos_hint: {"center_x": 0.5}
+            text_size: self.width, None
+            halign: "center"
+            valign: "middle"
+            on_release:
+                Factory.ConfirmationPopup().open()
+
+        Button:
+            text: "Back"
+            size_hint: .20, .125
+            pos_hint: {"center_x": 0.5}
+            on_release:
+                app.manager.pop()
+
+
+
+<RoadmapWindow>:
+    BoxLayout:
+        orientation: 'vertical'
+
+        Label:
+            text: 'Roadmap: Ideen und Umsetzung'
+            size_hint: 1, 0.1
+            text_size: self.width, None
+            halign: 'center'
+            font_size: "22sp"
+
+        GridLayout:
+            cols: 3
+            size_hint: 1, 0.15
+            MDLabel:
+                text: "Short plans"
+                font_style: "H6"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: 200/255, 135/255, 0/255, 1
+            MDLabel:
+                text: "Intermediate plans"
+                font_style: "H6"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: 200/255, 135/255, 0/255, 1
+            MDLabel:
+                text: "Long plans"
+                font_style: "H6"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: 200/255, 135/255, 0/255, 1
+        # Hier Ideen zu kurzfristigen Aspekten
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: 1, 0.6
+
+            BoxLayout:
+                orientation: 'vertical'
+
+                Label:
+                    text: 'Bug Fixing'
+                    size_hint: 1, 0.2
+
+                Label:
+                    text: ''
+                    size_hint: 1, 0.2
+
+                Label:
+                    text: ''
+                    size_hint: 1, 0.2
+
+            # Hier Ideen zu mittelfristigen Aspekten
+            BoxLayout:
+                orientation: 'vertical'
+
+                Label:
+                    text: 'User Feedback umsetzen'
+                    size_hint: 1, 0.2
+                    text_size: self.width, None
+                    halign: 'center'
+
+                Label:
+                    text: "Kurzgeschichte einbetten"
+                    size_hint: 1, 0.2
+                    text_size: self.width, None
+                    halign: 'center'
+
+                Label:
+                    text: ''
+                    size_hint: 1, 0.2
+
+            # Hier Ideen zu langfristigen Aspekten
+            BoxLayout:
+                orientation: 'vertical'
+
+                Label:
+                    text: "Planung weiterer interaktiver Text-Geschichten"
+                    size_hint: 1, 0.2
+                    text_size: self.width, None
+                    halign: 'center'
+
+                Label:
+                    text: ''
+                    size_hint: 1, 0.2
+
+                Label:
+                    text: ''
+                    size_hint: 1, 0.2
+
+        Button:
+            text: "Zurück"
+            size_hint: .20, .125
+            pos_hint: {"center_x": 0.5}
+            on_release:
+                app.manager.pop()
+
+
+
+
+<StoryWindow>:
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text: "Es war einmal ... Doch die Frage ist: Gehen wir ins Licht oder in die Schatten?"
+
+        Button:
+            text: "Licht"
+            pos_hint: {"center_x": 0.5}
+            on_release:
+                app.root.current = "Lichtfenster"
+                root.manager.transition.direction = "right"
+        Button:
+            text: "Schatten"
+            pos_hint: {"center_x": 0.5}
+            on_release:
+                app.root.current = "Schattenfenster"
+                root.manager.transition.direction = "left"
+
+
+<LichtWindow>:
+    Label:
+        text: "Zwei werden sterben"
+        color: 1, 0, 0, 1
+
+<SchattenWindow>:
+    Label:
+        text: "Alle werden leben"
+        color: 0, 1, 0, 1
+

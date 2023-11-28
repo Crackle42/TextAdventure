@@ -1,0 +1,72 @@
+#:import PointsCount laboptions.PointsCount
+
+<Kapitel1>:
+    BoxLayout:
+        orientation: "vertical"
+
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+
+            GridLayout:
+                id: kapitel1_grid_layout
+                size_hint_y: None
+                height: self.minimum_height
+                cols: 1
+                spacing: 10
+                padding_bot: 80
+
+                Label:
+                    id: kapitel1_label
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    text_size: self.width, None
+                    padding: 10, 10
+                    text: "Hello there in Kapitel 1!"
+
+                Button:
+                    id: chapter1_button1
+                    text: "Option 1"
+                    size_hint_y: None
+                    height: root.height*0.1
+                    pos_hint: {"center_x": 0.5}
+                    on_release:
+                        kapitel1_label.text = app.load_long_text(r"chap-sections\abcwordtest.txt")
+                        #kapitel1_grid_layout.clear_widgets()
+
+                Button:
+                    id: chapter1_button2
+                    text: "Option 2"
+                    size_hint_y: None
+                    height: root.height*0.1
+                    pos_hint: {"center_x": 0.5}
+                    on_release:
+                        kapitel1_label.text = "Text B"
+
+                Button:
+                    text: "Haunting Point"
+                    size_hint_y: None
+                    height: root.height*0.1
+                    pos_hint: {"center_x": 0.5}
+                    on_release:
+                        app.pointscount.increase_haunting_points()
+                        print("Haunting Points", app.pointscount.get_haunting_points())
+
+                Button:
+                    text: "Leader Point"
+                    size_hint_y: None
+                    height: root.height*0.1
+                    pos_hint: {"center_x": 0.5}
+                    on_release:
+                        app.pointscount.increase_leader_points()
+                        print("Leader Points", app.pointscount.get_leader_points())
+
+                Button:
+                    text: "Nächstes Kapitel"
+                    size_hint_y: None
+                    height: root.height*0.1
+                    pos_hint: {"center_x": 0.5}
+                    on_release:
+                        on_release: app.manager.push("Kapitel2")
+                        #app.save_last_screen("kapitel2_screen")
+
